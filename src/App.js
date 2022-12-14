@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+
 
 function App() {
+  const [items, setItems] = useState ([])
+  useEffect(()=> {
+    fetch("items.json")
+    .then(response=> response.json())
+    .then(items=>setItems(items))
+  }, [])
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>
+        Online Shop
+      </h1>
+
+
+      <table className="w-100">
+        <thead>
+          <tr>
+            <th>Наименование</th>
+            <th>Цена</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items&&items.map(item => <tr><td>{item.title}</td><td>{item.price}</td></tr>)}
+        </tbody>        
+      </table>
+      
+    </>
   );
 }
 

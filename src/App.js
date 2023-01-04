@@ -1,35 +1,17 @@
-import { useState, useEffect } from "react";
+import Events from "./components/Events";
+import Recomendations from "./components/Recomendations";
+import SearchForm from "./components/SearchForm";
 
-
-function App() {
-  const [items, setItems] = useState ([])
-  useEffect(()=> {
-    fetch("items.json")
-    .then(response=> response.json())
-    .then(items=>setItems(items))
-  }, [])
+export default function App() {
+  
   
   return (
     <>
-      <h1>
-        Online Shop
-      </h1>
-
-
-      <table className="w-100">
-        <thead>
-          <tr>
-            <th>Наименование</th>
-            <th>Цена</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items&&items.map(item => <tr><td>{item.title}</td><td>{item.price}</td></tr>)}
-        </tbody>        
-      </table>
-      
+      <SearchForm/>
+      <Events/>
+      <Recomendations/>
     </>
   );
 }
 
-export default App;
+

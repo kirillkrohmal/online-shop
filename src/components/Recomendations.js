@@ -5,9 +5,16 @@ export default function Recomendations(props) {
     const [recomendations, setRecomendations] = useState([]) 
 
     useEffect(() => {
-        fetch("recomendations.json")
-        .then (responce => responce.json())
+        fetch("/api/recomendations")
+        .then (responce => {
+          console.log(responce)
+          if (!responce.ok) {
+            throw Error(responce)
+          }
+          return responce.json()
+        })
         .then (array => setRecomendations(array))
+        .catch(error => console.log(error))
     }, [])
 
     return (
